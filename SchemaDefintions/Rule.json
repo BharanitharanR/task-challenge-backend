@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://your-platform.dev/schemas/rule.schema.json",
+  "title": "RuleDefinition",
+  "type": "object",
+  "required": ["kind", "id", "version", "spec"],
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "Rule",
+      "description": "Identifies this definition as a Rule"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_\\-]{2,100}$",
+      "description": "Globally unique rule identifier"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Immutable version number of the rule"
+    },
+    "spec": {
+      "type": "object",
+      "required": ["type", "input", "operator", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Rule evaluation type (e.g., THRESHOLD, RANGE, DURATION)"
+        },
+        "input": {
+          "type": "string",
+          "description": "Name of the input metric or derived evidence field"
+        },
+        "operator": {
+          "type": "string",
+          "enum": ["<", "<=", ">", ">=", "==", "!="],
+          "description": "Comparison operator used by the rule"
+        },
+        "value": {
+          "description": "Comparison value for the rule",
+          "oneOf": [
+            { "type": "number" },
+            { "type": "string" },
+            { "type": "boolean" }
+          ]
+        }
+      }
+    }
+  }
+}
