@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bharanitharan-WIP/schemas/evidence-type.schema.json",
+  "title": "EvidenceTypeDefinition",
+  "type": "object",
+  "required": ["kind", "id", "version", "status", "spec"],
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "EvidenceType",
+      "description": "Identifies this definition as an EvidenceType"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]{2,100}$",
+      "description": "Globally unique evidence type identifier"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Immutable version number of the evidence type"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["DRAFT", "ACTIVE", "DEPRECATED"],
+      "description": "Lifecycle status controlling validation and runtime eligibility"
+    },
+    "spec": {
+      "type": "object",
+      "required": ["metrics"],
+      "additionalProperties": false,
+      "properties": {
+        "metrics": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "$ref": "#/$defs/metricDefinition"
+          },
+          "description": "Map of metric definitions available under this evidence type"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "metricDefinition": {
+      "type": "object",
+      "required": ["type", "unit", "capabilities"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["NUMBER", "BOOLEAN", "STRING", "DURATION"],
+          "description": "Data type of the metric"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Measurement unit of the metric"
+        },
+        "capabilities": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": ["COMPARABLE", "AGGREGATABLE", "TEMPORAL"]
+          },
+          "uniqueItems": true,
+          "description": "Operations supported by this metric"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "Human-readable description of the metric"
+        }
+      }
+    }
+  }
+}
