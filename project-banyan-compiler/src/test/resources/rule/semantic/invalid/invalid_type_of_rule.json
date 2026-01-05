@@ -1,0 +1,11 @@
+{
+  "kind": "Rule",
+  "id": "min_score_required",
+  "version": 3,
+  "spec": {
+    "type": "DUMMY",
+    "input": "score",
+    "operator": ">",
+    "value": 80
+  }
+}

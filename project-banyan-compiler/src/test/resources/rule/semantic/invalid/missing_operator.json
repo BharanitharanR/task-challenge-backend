@@ -1,0 +1,10 @@
+{
+  "kind": "Rule",
+  "id": "missing_operator",
+  "version": 1,
+  "spec": {
+    "type": "THRESHOLD",
+    "input": "x",
+    "value": 10
+  }
+}

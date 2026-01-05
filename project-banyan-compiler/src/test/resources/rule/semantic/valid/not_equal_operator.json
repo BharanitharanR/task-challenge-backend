@@ -1,0 +1,11 @@
+{
+  "kind": "Rule",
+  "id": "not_guest_user",
+  "version": 1,
+  "spec": {
+    "type": "EQUALITY",
+    "input": "userType",
+    "operator": "!=",
+    "value": "GUEST"
+  }
+}

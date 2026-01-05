@@ -1,0 +1,11 @@
+{
+  "kind": "RULE",
+  "id": "bad_kind",
+  "version": 1,
+  "spec": {
+    "type": "THREHOLD",
+    "input": "x",
+    "operator": "<=",
+    "value": 10
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "kind": "Rule",
+  "id": "extra_spec_prop",
+  "version": 1,
+  "spec": {
+    "type": "THRESHOLD",
+    "input": "x",
+    "operator": "<=",
+    "value": 10,
+    "unexpected": true
+  }
+}

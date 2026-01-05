@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://banyan.dev/schemas/rule.schema.json",
+  "title": "RuleDefinition",
+  "type": "object",
+  "required": ["kind", "id", "version", "spec"],
+  "additionalProperties": false,
+
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "Rule",
+      "description": "Identifies this definition as a Rule"
+    },
+
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_\\-]{2,100}$",
+      "description": "Globally unique rule identifier"
+    },
+
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Immutable version of the rule"
+    },
+
+    "spec": {
+      "type": "object",
+      "required": ["type", "input", "operator", "value"],
+      "additionalProperties": false,
+
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Rule evaluation strategy (interpreted semantically)"
+        },
+
+        "input": {
+          "type": "string",
+          "description": "Evidence field this rule evaluates"
+        },
+
+        "operator": {
+          "type": "string",
+          "enum": ["<", "<=", ">", ">=", "==", "!="],
+          "description": "Comparison operator"
+        },
+
+        "value": {
+          "description": "Literal value used for comparison",
+          "oneOf": [
+            { "type": "number" },
+            { "type": "string" },
+            { "type": "boolean" }
+          ]
+        }
+      }
+    }
+  }
+}

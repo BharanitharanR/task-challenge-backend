@@ -1,0 +1,11 @@
+{
+  "kind": "Rule",
+  "id": "country_check",
+  "version": 1,
+  "spec": {
+    "type": "EQUALITY",
+    "input": "country",
+    "operator": "==",
+    "value": "IN"
+  }
+}

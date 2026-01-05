@@ -1,0 +1,11 @@
+{
+  "kind": "Rule",
+  "id": "min_score_required",
+  "version": 3,
+  "spec": {
+    "type": "THRESHOLD",
+    "input": "score",
+    "operator": ">",
+    "value": 80
+  }
+}

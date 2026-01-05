@@ -1,0 +1,14 @@
+{
+  "kind": "Rule",
+  "id": "invalid_value_type",
+  "version": 1,
+  "spec": {
+    "type": "THRESHOLD",
+    "input": "x",
+    "operator": "<=",
+    "value": {
+      "min": 1,
+      "max": 10
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "kind": "Rule",
+  "id": "extra_prop",
+  "version": 1,
+  "spec": {
+    "type": "THRESHOLD",
+    "input": "x",
+    "operator": "",
+    "value": true
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "kind": "Rule",
+  "id": "max_failed_attempts",
+  "version": 1,
+  "spec": {
+    "type": "THRESHOLD",
+    "input": "failedAttempts",
+    "operator": "<=",
+    "value": 3
+  }
+}

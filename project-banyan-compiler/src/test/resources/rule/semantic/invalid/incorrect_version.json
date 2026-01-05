@@ -1,0 +1,11 @@
+{
+  "kind": "Rule",
+  "id": "zero_version",
+  "version": 0,
+  "spec": {
+    "type": "THRESHOLD",
+    "input": "x",
+    "operator": "<=",
+    "value": bb
+  }
+}

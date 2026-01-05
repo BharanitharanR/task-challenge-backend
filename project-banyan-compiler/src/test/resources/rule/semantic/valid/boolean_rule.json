@@ -1,0 +1,11 @@
+{
+  "kind": "Rule",
+  "id": "business_hours_only",
+  "version": 2,
+  "spec": {
+    "type": "EQUALITY",
+    "input": "businessHours",
+    "operator": "==",
+    "value": true
+  }
+}

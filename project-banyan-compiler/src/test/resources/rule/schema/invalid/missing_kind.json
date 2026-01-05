@@ -1,0 +1,10 @@
+{
+  "id": "missing_kind",
+  "version": 1,
+  "spec": {
+    "type": "THRESHOLD",
+    "input": "x",
+    "operator": "<=",
+    "value": 10
+  }
+}

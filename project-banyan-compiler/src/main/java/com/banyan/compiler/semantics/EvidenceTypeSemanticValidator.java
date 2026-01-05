@@ -41,11 +41,11 @@ public class EvidenceTypeSemanticValidator implements SemanticValidator {
 
                 if(! uniqueNames.add(field.at("/name").asText(null)) )
                 {
-                    semanticViolations.add("RULE 10001: Duplicate Names for fields are'nt supported. The inidvidual field names should be unique");
+                    semanticViolations.add("EVIDENCE_TYPE_ERR 10001: Duplicate Names for fields are'nt supported. The inidvidual field names should be unique");
                 }
                 if(!ALLOWED_TYPES.contains(field.at("/type").asText(null)))
                 {
-                    semanticViolations.add("RULE 10002: Not a valid 'type'.Allowed values are anyone of "+ String.join("", ALLOWED_TYPES));
+                    semanticViolations.add("EVIDENCE_TYPE_ERR 10002: Not a valid 'type'.Allowed values are anyone of "+ String.join("", ALLOWED_TYPES));
                 }
                 Boolean required = field.at("/required").asBoolean();
                 if(required) {
@@ -54,7 +54,7 @@ public class EvidenceTypeSemanticValidator implements SemanticValidator {
                 }
             }
             if(!atLeastOneFieldIsRequired) {
-                semanticViolations.add("RULE 10003: Not one field is required.");
+                semanticViolations.add("EVIDENCE_TYPE_ERR 10003: Not one field is required.");
             }
 
             return semanticViolations;
