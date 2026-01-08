@@ -3,7 +3,7 @@
   "id": "business_hours_only",
   "version": 2,
   "spec": {
-    "type": "FLAG",
+    "type": "RANGE",
     "input": "businessHours",
     "operator": "==",
     "value": true
