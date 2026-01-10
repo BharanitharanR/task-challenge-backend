@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://banyan.dev/schemas/challenge.schema.json",
+  "title": "ChallengeDefinition",
+  "type": "object",
+  "required": ["kind", "id", "version", "spec"],
+  "additionalProperties": false,
+
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "Challenge",
+      "description": "Identifies this definition as a Challenge"
+    },
+
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_\\-]{2,100}$",
+      "description": "Globally unique challenge identifier"
+    },
+
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Monotonically increasing challenge version"
+    },
+
+    "spec": {
+      "type": "object",
+      "required": ["tasks"],
+      "additionalProperties": false,
+
+      "properties": {
+        "tasks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_\\-]{2,100}$"
+          },
+          "description": "List of task identifiers included in this challenge"
+        },
+
+        "description": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "Human-readable description of the challenge"
+        }
+      }
+    }
+  }
+}
