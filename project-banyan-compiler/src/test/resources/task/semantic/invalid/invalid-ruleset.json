@@ -1,0 +1,8 @@
+{
+  "kind": "Task",
+  "id": "missing_result_type",
+  "version": 1,
+  "spec": {
+    "rulesetRef": "ruleset_x"
+  }
+}

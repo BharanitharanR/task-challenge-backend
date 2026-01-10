@@ -1,0 +1,8 @@
+{
+  "id": "missing_kind",
+  "version": 1,
+  "spec": {
+    "rulesetRef": "r1",
+    "resultType": "BOOLEAN"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "kind": "Task",
+  "id": "extra_field",
+  "version": 1,
+  "spec": {
+    "rulesetRef": "r1",
+    "resultType": "BOOLEAN",
+    "threshold": 5
+  }
+}

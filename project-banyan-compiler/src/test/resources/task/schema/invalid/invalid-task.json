@@ -1,0 +1,10 @@
+{
+  "kind": "Task",
+  "id": "logic_in_task",
+  "version": 1,
+  "spec": {
+    "rulesetRef": "ruleset_x",
+    "resultType": "BOOLEAN",
+    "operator": "AND"
+  }
+}

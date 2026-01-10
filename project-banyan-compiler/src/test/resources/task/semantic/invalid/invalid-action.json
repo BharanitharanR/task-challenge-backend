@@ -1,0 +1,18 @@
+{
+  "kind": "Task",
+  "id": "action_with_params",
+  "version": 1,
+  "spec": {
+    "rulesetRef": "ruleset_y",
+    "resultType": "BOOLEAN",
+    "actions": [
+      {
+        "on": "FAILURE",
+        "emit": "LOCK_ACCOUNT",
+        "params": {
+          "duration": "30m"
+        }
+      }
+    ]
+  }
+}

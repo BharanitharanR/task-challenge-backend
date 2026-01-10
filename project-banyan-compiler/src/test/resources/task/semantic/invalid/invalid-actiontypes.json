@@ -1,0 +1,15 @@
+{
+  "kind": "Task",
+  "id": "bad_action_on",
+  "version": 1,
+  "spec": {
+    "rulesetRef": "ruleset_z",
+    "resultType": "BOOLEAN",
+    "actions": [
+      {
+        "on": "WHEN_FAILED",
+        "emit": "SEND_ALERT"
+      }
+    ]
+  }
+}

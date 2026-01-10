@@ -20,7 +20,7 @@ public class RuleSetSemanticValidator implements SemanticValidator {
             JsonNode expression = root.at("/spec/expression");
 
             if (expression.isMissingNode()) {
-                violations.add("RULESET_ERR 20001: Missing expression in ruleset");
+                violations.add("RULESET_ERR 30001: Missing expression in ruleset");
                 return violations;
             }
 
@@ -42,7 +42,7 @@ public class RuleSetSemanticValidator implements SemanticValidator {
             if (!node.get("ruleRef").isTextual()
                     || node.get("ruleRef").asText().isBlank()) {
                 violations.add(
-                        "RULESET_ERR 20002: ruleRef must be a non-empty string"
+                        "RULESET_ERR 30002: ruleRef must be a non-empty string"
                 );
             }
             return;
@@ -54,14 +54,14 @@ public class RuleSetSemanticValidator implements SemanticValidator {
             String operator = node.get("operator").asText(null);
             if (!ALLOWED_OPERATORS.contains(operator)) {
                 violations.add(
-                        "RULESET_ERR 20003: Invalid logical operator: " + operator
+                        "RULESET_ERR 30003: Invalid logical operator: " + operator
                 );
             }
 
             JsonNode operands = node.get("operands");
             if (!operands.isArray() || operands.size() < 2) {
                 violations.add(
-                        "RULESET_ERR 20004: Logical operator must have at least 2 operands"
+                        "RULESET_ERR 30004: Logical operator must have at least 2 operands"
                 );
                 return;
             }
@@ -74,7 +74,7 @@ public class RuleSetSemanticValidator implements SemanticValidator {
 
         // Invalid node
         violations.add(
-                "RULESET_ERR 20005: Invalid expression node structure"
+                "RULESET_ERR 30005: Invalid expression node structure"
         );
     }
 }

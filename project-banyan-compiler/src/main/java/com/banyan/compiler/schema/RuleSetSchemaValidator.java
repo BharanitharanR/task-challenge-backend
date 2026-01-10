@@ -11,33 +11,13 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
-public class RuleSetSchemaValidator implements SchemaValidator{
-    private static final ObjectMapper mapper = new ObjectMapper();
-    private final JsonSchema schema;
+public class RuleSetSchemaValidator extends SchemaValidatorImpl implements SchemaValidator{
 
+    private static final String resourceName = "/schemas/ruleset.schema.json";
+    private static final String exceptionErr = "RuleSet schema not found on classpath";
+    private static final String schemaType = "RULE_SET";
 
     public RuleSetSchemaValidator() {
-        JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
-        Optional<InputStream> schemaStream = Optional.ofNullable(getClass().getResourceAsStream("/schemas/ruleset.schema.json"));
-        if(schemaStream.isPresent())
-            this.schema = factory.getSchema(schemaStream.get());
-        else
-            throw new IllegalStateException(
-                    "Ruleset schema not found on classpath");
-    }
-
-    @Override
-    public List<String> validate(String json) {
-        try
-        {
-            JsonNode dslJson = mapper.readTree(json);
-            return this.schema.validate(dslJson).stream().map(ValidationMessage::getMessage).toList();
-        }
-        catch(Exception e)
-        {
-            return List.of( "RULE_SET_SCHEMA_PARSE_ERROR: " +
-                    (e.getMessage() != null ? e.getMessage() : e.getClass().getSimpleName()));
-        }
-
+        super(resourceName, exceptionErr, schemaType);
     }
 }

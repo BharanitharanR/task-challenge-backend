@@ -35,6 +35,7 @@ public class EvidenceTypeSchemaValidatorTest {
         for (String json : jsons) {
             List<String> errors = validator.validate(json);
             System.out.println(json);
+            errors.forEach(System.out::println);
             assertFalse(errors.isEmpty(), "Expected errors but got none");
         }
     }

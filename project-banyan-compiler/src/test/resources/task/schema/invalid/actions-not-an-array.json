@@ -1,0 +1,13 @@
+{
+  "kind": "Task",
+  "id": "actions_not_array",
+  "version": 1,
+  "spec": {
+    "rulesetRef": "r1",
+    "resultType": "BOOLEAN",
+    "actions": {
+      "on": "FAILURE",
+      "emit": "LOCK_ACCOUNT"
+    }
+  }
+}

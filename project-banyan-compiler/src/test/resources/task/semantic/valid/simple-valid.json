@@ -1,0 +1,9 @@
+{
+  "kind": "Task",
+  "id": "basic_task",
+  "version": 1,
+  "spec": {
+    "rulesetRef": "basic_ruleset",
+    "resultType": "BOOLEAN"
+  }
+}

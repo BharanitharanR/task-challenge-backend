@@ -1,0 +1,14 @@
+{
+  "kind": "Task",
+  "id": "task_with_actions",
+  "version": 1,
+  "spec": {
+    "rulesetRef": "login_ruleset",
+    "resultType": "BOOLEAN",
+    "actions": [
+      { "on": "FAILURE", "emit": "LOCK_ACCOUNT" },
+      { "on": "ALWAYS", "emit": "AUDIT_EVENT" }
+    ],
+    "description": "Login security task"
+  }
+}
