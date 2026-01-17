@@ -3,7 +3,10 @@
   "id": "basic_task",
   "version": 1,
   "spec": {
-    "rulesetRef": "basic_ruleset",
+    "rulesetRef":{
+      "id": "basic_ruleset",
+      "version": 1
+    },
     "resultType": "BOOLEAN"
   }
 }

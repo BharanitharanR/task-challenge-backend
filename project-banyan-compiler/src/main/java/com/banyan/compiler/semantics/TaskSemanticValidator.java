@@ -30,9 +30,11 @@ public class TaskSemanticValidator implements SemanticValidator
 
             // TS20001: rulesetRef must be non-empty
             JsonNode rulesetRef = spec.get("rulesetRef");
-            if (rulesetRef == null || rulesetRef.asText().isBlank()) {
+            if (rulesetRef == null || !rulesetRef.isObject()) {
                 violations.add("TASK_ERR 40001: rulesetRef must be non-empty");
             }
+            if(rulesetRef.get("id") == null || (rulesetRef.get("id").isObject() || rulesetRef.get("id").isMissingNode() || rulesetRef.get("id").isArray() ))
+                violations.add("TASK_ERR 40009: rulesetRef must have a valid ID");
 
             // TS20002: resultType must be valid
             JsonNode resultType = spec.get("resultType");
