@@ -33,7 +33,7 @@ public class EvidenceBackendCompilerTest {
              CompiledEvidenceTypeArtifact compileEvidence =  compiler.compile(mapper.readTree(json),ctx);
              ctx.register(compileEvidence);
             compileEvidence.getFields().values().forEach(System.out::println);
-            System.out.println(compileEvidence.getId()+":"+compileEvidence.getVersion());
+
             assertEquals(ArtifactType.EvidenceType,compileEvidence.type());
         }
         assertEquals("LOGIN_ATTEMPT",ctx.resolve(ArtifactType.EvidenceType,"LOGIN_ATTEMPT",1).id());
