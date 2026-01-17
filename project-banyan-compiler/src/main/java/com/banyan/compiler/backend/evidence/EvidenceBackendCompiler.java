@@ -1,20 +1,21 @@
 package com.banyan.compiler.backend.evidence;
-
-import com.banyan.compiler.backend.api.CompiledArtifact;
+import com.banyan.compiler.backend.api.CompilationMetadata;
 import com.banyan.compiler.backend.context.CompilationContext;
 import com.banyan.compiler.backend.spi.AbstractBackendCompiler;
 import com.banyan.compiler.enums.EvidenceValueType;
 import com.fasterxml.jackson.databind.JsonNode;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class EvidenceBackendCompiler extends AbstractBackendCompiler<CompiledEvidenceTypeArtifact> {
     @Override
     public CompiledEvidenceTypeArtifact compile(JsonNode validatedDsl, CompilationContext context) {
-        String id = validatedDsl.get("id").asText();
-        int version = validatedDsl.get("version").asInt();
-        Map<String, EvidenceField> fields = new HashMap<>();
+        String id = readId(validatedDsl);
+        int version = readVersion(validatedDsl);
+        Map<String, EvidenceField> fields = new LinkedHashMap<>();
+        CompilationMetadata metadata = metadata(validatedDsl);
+
         for (JsonNode f : validatedDsl.at("/spec/fields")) {
             fields.put(
                     f.get("name").asText(),
@@ -25,6 +26,9 @@ public class EvidenceBackendCompiler extends AbstractBackendCompiler<CompiledEvi
                     )
             );
         }
-        return new CompiledEvidenceTypeArtifact(id,version,fields);
+        return new CompiledEvidenceTypeArtifact(id,version,fields,metadata);
     }
+
+
+
 }

@@ -1,24 +1,25 @@
-package com.banyan.compiler.backend.evidence;
+package com.banyan.compiler.backend.rule;
+
 
 import com.banyan.compiler.backend.api.CompilationMetadata;
 import com.banyan.compiler.backend.api.CompiledArtifact;
+import com.banyan.compiler.backend.evidence.EvidenceField;
 import com.banyan.compiler.enums.ArtifactType;
-import lombok.Getter;
 
 import java.util.Map;
 
-@Getter
-public final class CompiledEvidenceTypeArtifact implements CompiledArtifact<Map<String,EvidenceField>> {
+public class CompiledRuleArtifact implements CompiledArtifact<CompiledRule> {
+
 
     private final String id;
     private final int version;
-    private final Map<String, EvidenceField> fields;
+    private final CompiledRule field;
     private final CompilationMetadata metadata;
 
-    public CompiledEvidenceTypeArtifact(String id,int version,Map<String,EvidenceField> fields,CompilationMetadata metadata) {
+    public CompiledRuleArtifact(String id, int version, CompiledRule field, CompilationMetadata metadata) {
         this.id = id;
         this.version = version;
-        this.fields = fields;
+        this.field = field;
         this.metadata = metadata;
     }
 
@@ -29,7 +30,7 @@ public final class CompiledEvidenceTypeArtifact implements CompiledArtifact<Map<
 
     @Override
     public ArtifactType type() {
-        return ArtifactType.EvidenceType;
+        return ArtifactType.Rule;
     }
 
     @Override
@@ -43,7 +44,7 @@ public final class CompiledEvidenceTypeArtifact implements CompiledArtifact<Map<
     }
 
     @Override
-    public Map<String,EvidenceField> payload() {
-        return this.fields;
+    public CompiledRule payload() {
+        return this.field;
     }
 }

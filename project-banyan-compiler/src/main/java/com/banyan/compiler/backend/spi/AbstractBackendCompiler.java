@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
-public abstract class AbstractBackendCompiler<T extends CompiledArtifact>
+public abstract class AbstractBackendCompiler<T extends CompiledArtifact<?>>
         implements BackendCompiler<T> {
 
     protected String readId(JsonNode root) {

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -32,10 +33,9 @@ public class EvidenceBackendCompilerTest {
 
              CompiledEvidenceTypeArtifact compileEvidence =  compiler.compile(mapper.readTree(json),ctx);
              ctx.register(compileEvidence);
-            compileEvidence.getFields().values().forEach(System.out::println);
-
             assertEquals(ArtifactType.EvidenceType,compileEvidence.type());
         }
+        System.out.println(ctx.resolve(ArtifactType.EvidenceType,"LOGIN_ATTEMPT",1).payload().toString());
         assertEquals("LOGIN_ATTEMPT",ctx.resolve(ArtifactType.EvidenceType,"LOGIN_ATTEMPT",1).id());
 
     }
