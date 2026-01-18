@@ -39,20 +39,28 @@ public final class ChallengeSemanticValidator implements SemanticValidator {
             for (JsonNode taskRefNode : tasksNode) {
 
                 // CH-201: task reference must be a non-empty string
-                if (!taskRefNode.isTextual()
-                        || taskRefNode.asText().isBlank()) {
+                if (!taskRefNode.isObject()
+                        || taskRefNode.isMissingNode()) {
                     violations.add(
                             "CH_ERR_50002: Task reference must be a non-empty string"
                     );
                     continue;
                 }
 
-                String taskId = taskRefNode.asText();
+                String taskId = taskRefNode.at("/id").asText();
 
                 // CH-201: no duplicate tasks
                 if (!uniqueTaskIds.add(taskId)) {
                     violations.add(
                             "CH_ERR_50003: Duplicate task reference not allowed: " + taskId
+                    );
+                }
+
+                int version = taskRefNode.at("/version").asInt();
+                // CH-201: no duplicate tasks
+                if ( version <= 0 ) {
+                    violations.add(
+                            "CH_ERR_50006: Empty /INcorrect versions of Task not allowed " + taskId
                     );
                 }
             }

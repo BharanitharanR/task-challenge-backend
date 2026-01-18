@@ -4,8 +4,8 @@
   "version": 1,
   "spec": {
     "tasks": [
-      "task_one",
-      "task_two"
+      {"id": "task_with_actions","version": 1},
+      {"id":"basic_task","version": 1}
     ]
   }
 }

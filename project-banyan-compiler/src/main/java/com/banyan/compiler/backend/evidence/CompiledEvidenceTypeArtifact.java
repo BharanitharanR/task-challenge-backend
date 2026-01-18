@@ -1,49 +1,16 @@
 package com.banyan.compiler.backend.evidence;
 
+import com.banyan.compiler.backend.api.AbstractCompiledArtifact;
 import com.banyan.compiler.backend.api.CompilationMetadata;
-import com.banyan.compiler.backend.api.CompiledArtifact;
 import com.banyan.compiler.enums.ArtifactType;
-import lombok.Getter;
+
 
 import java.util.Map;
 
-@Getter
-public final class CompiledEvidenceTypeArtifact implements CompiledArtifact<Map<String,EvidenceField>> {
-
-    private final String id;
-    private final int version;
-    private final Map<String, EvidenceField> fields;
-    private final CompilationMetadata metadata;
+public final class CompiledEvidenceTypeArtifact extends AbstractCompiledArtifact<Map<String,EvidenceField>> {
 
     public CompiledEvidenceTypeArtifact(String id,int version,Map<String,EvidenceField> fields,CompilationMetadata metadata) {
-        this.id = id;
-        this.version = version;
-        this.fields = fields;
-        this.metadata = metadata;
+        super(id,version, ArtifactType.EvidenceType,fields,metadata);
     }
 
-    @Override
-    public String id() {
-        return this.id;
-    }
-
-    @Override
-    public ArtifactType type() {
-        return ArtifactType.EvidenceType;
-    }
-
-    @Override
-    public int version() {
-        return this.version;
-    }
-
-    @Override
-    public CompilationMetadata metadata() {
-        return this.metadata;
-    }
-
-    @Override
-    public Map<String,EvidenceField> payload() {
-        return this.fields;
-    }
 }
