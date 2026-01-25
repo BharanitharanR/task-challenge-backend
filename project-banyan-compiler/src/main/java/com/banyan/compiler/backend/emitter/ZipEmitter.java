@@ -11,6 +11,7 @@ import com.banyan.compiler.backend.rule.CompiledRule;
 import com.banyan.compiler.backend.ruleset.CompiledRuleset;
 import com.banyan.compiler.backend.ruleset.CompiledRulesetArtifact;
 import com.banyan.compiler.backend.task.CompiledTask;
+import com.banyan.compiler.backend.task.CompiledTaskArtifact;
 import com.banyan.compiler.enums.ArtifactType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -62,6 +63,8 @@ public class ZipEmitter implements ArtifactEmitter{
                    } catch (IOException e) {
                        throw new RuntimeException(e);
                    }
+
+ 
 
 
                }else  if(compiledArtifact.type()== ArtifactType.Rule)
