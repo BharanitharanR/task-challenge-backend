@@ -64,6 +64,7 @@ static void register() throws JsonProcessingException {
         System.out.println("Rule: "+json);
         CompiledRuleArtifact compileEvidence = compiler.compile(mapper.readTree(json), ctx);
         ctx.register(compileEvidence);
+        ctx.zipContext();
     }
     // Rules Registration
     for (String json : ruleJsons) {
@@ -71,6 +72,7 @@ static void register() throws JsonProcessingException {
         System.out.println("Rule: "+json);
         CompiledRuleArtifact compileEvidence = compiler.compile(mapper.readTree(json), ctx);
         ctx.register(compileEvidence);
+        ctx.zipContext();
     }
     // Ruleset Registration
     for (String json : ruleSetJsons) {
@@ -78,13 +80,16 @@ static void register() throws JsonProcessingException {
         System.out.println("Ruleset: "+json);
         CompiledRulesetArtifact compileEvidence = compiler.compile(mapper.readTree(json), ctx);
         ctx.register(compileEvidence);
+        ctx.zipContext();
     }
     //Task Registration
     for (String json : taskJsons) {
         TaskBackendCompiler compiler = new TaskBackendCompiler();
         System.out.println("Task: "+json);
         CompiledTaskArtifact compileEvidence = compiler.compile(mapper.readTree(json), ctx);
+        ctx.zipContext();
         ctx.register(compileEvidence);
+        ctx.zipContext();
     }
 
 }
@@ -104,6 +109,6 @@ static void register() throws JsonProcessingException {
         }
         System.out.println(ctx.resolve(ArtifactType.Challenge,"unique_task_challenge",1).payload().toString());
         assertEquals("unique_task_challenge",ctx.resolve(ArtifactType.Challenge,"unique_task_challenge",1).id());
-
+        ctx.zipContext();
     }
 }
