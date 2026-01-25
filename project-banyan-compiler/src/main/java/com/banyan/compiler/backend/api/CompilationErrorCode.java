@@ -15,7 +15,8 @@ public enum CompilationErrorCode {
     // Backend failures
     AST_BUILD_FAILED,
     CONTEXT_CORRUPTED,
-
+    // CONTEXT_FREEZE
+    CONTEXT_FREEZE,
     // Catch-all
     INTERNAL_COMPILER_ERROR
 }
