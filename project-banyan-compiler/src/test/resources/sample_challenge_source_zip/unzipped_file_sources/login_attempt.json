@@ -1,0 +1,20 @@
+{
+  "kind": "EvidenceType",
+  "id": "LOGIN_ATTEMPT",
+  "version": 1,
+  "status": "ACTIVE",
+  "spec": {
+    "fields": [
+      {
+        "name": "failedAttempts",
+        "type": "INTEGER",
+        "required": true
+      },
+      {
+        "name": "businessHours",
+        "type": "BOOLEAN",
+        "required": true
+      }
+    ]
+  }
+}

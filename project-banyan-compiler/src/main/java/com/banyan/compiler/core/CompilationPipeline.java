@@ -32,6 +32,6 @@ public interface CompilationPipeline {
         List<LintFinding> lintFinding =  lint().lint(dslJson);
 
         List<String> warnings = lintFinding.stream().map(LintFinding::getMessage).toList();
-        return CompilationResult.success(null,warnings);
+        return CompilationResult.success(dslJson,warnings);
     }
 }

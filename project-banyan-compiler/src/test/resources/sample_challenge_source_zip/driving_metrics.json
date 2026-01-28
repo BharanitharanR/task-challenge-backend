@@ -1,0 +1,20 @@
+{
+  "kind": "EvidenceType",
+  "id": "DRIVING_METRIC",
+  "version": 2,
+  "status": "DRAFT",
+  "spec": {
+    "fields": [
+      {
+        "name": "speedOverLimitSeconds",
+        "type": "DURATION",
+        "required": true
+      },
+      {
+        "name": "laneDepartureCount",
+        "type": "INTEGER",
+        "required": false
+      }
+    ]
+  }
+}

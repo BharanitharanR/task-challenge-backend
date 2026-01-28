@@ -1,0 +1,25 @@
+{
+  "kind": "EvidenceType",
+  "id": "COMPLEX_TYPE",
+  "version": 3,
+  "status": "DEPRECATED",
+  "spec": {
+    "fields": [
+      {
+        "name": "count",
+        "type": "INTEGER",
+        "required": true
+      },
+      {
+        "name": "ratio",
+        "type": "DECIMAL",
+        "required": false
+      },
+      {
+        "name": "label",
+        "type": "STRING",
+        "required": true
+      }
+    ]
+  }
+}

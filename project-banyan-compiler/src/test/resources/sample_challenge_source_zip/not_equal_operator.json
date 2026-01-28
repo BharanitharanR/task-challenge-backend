@@ -1,0 +1,15 @@
+{
+  "kind": "Rule",
+  "id": "not_guest_user",
+  "version": 1,
+  "spec": {
+    "evidenceTypeRef": {
+      "id": "CONSOLIDATED_EVIDENCES",
+      "version": 1
+    },
+    "type": "EQUALITY",
+    "input": "userType",
+    "operator": "!=",
+    "value": "GUEST"
+  }
+}

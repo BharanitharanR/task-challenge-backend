@@ -1,0 +1,15 @@
+{
+  "kind": "EvidenceType",
+  "id": "MINIMAL_TYPE",
+  "version": 1,
+  "status": "DRAFT",
+  "spec": {
+    "fields": [
+      {
+        "name": "flag",
+        "type": "BOOLEAN",
+        "required": true
+      }
+    ]
+  }
+}

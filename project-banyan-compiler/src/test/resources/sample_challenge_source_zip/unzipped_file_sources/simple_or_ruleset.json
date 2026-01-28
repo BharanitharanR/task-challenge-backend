@@ -1,0 +1,14 @@
+{
+  "kind": "Ruleset",
+  "id": "or_ruleset",
+  "version": 1,
+  "spec": {
+    "expression": {
+      "operator": "OR",
+      "operands": [
+        { "ruleRef": "geo_allowed" , "version":  1},
+        { "ruleRef": "ip_whitelisted", "version": 2 }
+      ]
+    }
+  }
+}
