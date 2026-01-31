@@ -94,10 +94,11 @@ public class InitiateCompilation {
             }
         }
     }
+    /*
     public static void main(String args[]) {
          /*
             Accepts the input containing a zip file
-         */
+         *
 
         try {
             UnzipExample.unzip("/Users/bharani/Documents/task-challenge-backend/project-banyan-compiler/src/test/resources/sample_challenge_source_zip/challenge_source.zip", "/Users/bharani/Documents/task-challenge-backend/project-banyan-compiler/src/test/resources/sample_challenge_source_zip/unzipped_file_sources");
@@ -194,4 +195,6 @@ public class InitiateCompilation {
             System.out.println("Errror"+e.getMessage());
         }
     }
+
+     */
 }

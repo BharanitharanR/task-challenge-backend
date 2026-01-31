@@ -1,31 +1,20 @@
 package com.banyan.compiler.backend.emitter;
 
-import com.banyan.compiler.backend.api.CompilationMetadata;
 import com.banyan.compiler.backend.api.CompiledArtifact;
-import com.banyan.compiler.backend.challenge.CompiledChallenge;
-import com.banyan.compiler.backend.challenge.CompiledChallengeArtifact;
-import com.banyan.compiler.backend.evidence.CompiledEvidenceType;
 import com.banyan.compiler.backend.outcome.CompilationOutcome;
 import com.banyan.compiler.backend.outcome.CompilationRoot;
-import com.banyan.compiler.backend.rule.CompiledRule;
-import com.banyan.compiler.backend.ruleset.CompiledRuleset;
-import com.banyan.compiler.backend.ruleset.CompiledRulesetArtifact;
-import com.banyan.compiler.backend.task.CompiledTask;
-import com.banyan.compiler.backend.task.CompiledTaskArtifact;
 import com.banyan.compiler.enums.ArtifactType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Timestamp;
 import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+import com.banyan.compiler.backend.emitter.ManifestHeader;
 
 public class ZipEmitter implements ArtifactEmitter{
     private static final ObjectMapper objectMapper = new ObjectMapper();
