@@ -27,10 +27,23 @@
 
     "spec": {
       "type": "object",
-      "required": ["type", "input", "operator", "value"],
+      "required": ["type", "input", "operator", "value","evidenceTypeRef"],
       "additionalProperties": false,
-
       "properties": {
+        "evidenceTypeRef": {
+          "type": "object",
+          "required": ["id","version"],
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Evidence type"
+            },
+            "version": {
+              "type": "integer",
+              "description": "Evidentype version"
+            }
+          }
+        },
         "type": {
           "type": "string",
           "description": "Rule evaluation strategy (interpreted semantically)"

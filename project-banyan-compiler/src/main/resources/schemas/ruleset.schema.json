@@ -41,12 +41,16 @@
 
     "ruleRefNode": {
       "type": "object",
-      "required": ["ruleRef"],
+      "required": ["ruleRef","version"],
       "additionalProperties": false,
       "properties": {
         "ruleRef": {
           "type": "string",
           "minLength": 1
+        },
+        "version": {
+          "type": "integer",
+          "description": "version of rule"
         }
       }
     },

@@ -1,0 +1,17 @@
+{
+  "kind": "Challenge",
+  "id": "iso42001_ethical_risk_v1",
+  "version": 1,
+  "spec": {
+    "tasks": [
+      {
+        "id": "task_with_actions",
+        "version": 1
+      },
+      {
+        "id": "basic_task",
+        "version": 1
+      }
+    ]
+  }
+}

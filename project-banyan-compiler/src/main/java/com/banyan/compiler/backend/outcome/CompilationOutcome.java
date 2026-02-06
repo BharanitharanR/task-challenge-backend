@@ -23,4 +23,12 @@ public final class  CompilationOutcome {
     public boolean isSuccess() {
         return errors.isEmpty();
     }
+
+    public Set<CompiledArtifact<?>> getReachableArtifacts() {
+        return reachableArtifacts;
+    }
+
+    public List<CompilationException> errors() {
+        return errors;
+    }
 }
