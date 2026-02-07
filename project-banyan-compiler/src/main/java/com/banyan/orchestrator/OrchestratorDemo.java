@@ -15,7 +15,8 @@ public class OrchestratorDemo {
         Orchestrator orchestrator = new Orchestrator();
         
         // Example usage - compile a challenge from a ZIP file
-        String zipFilePath = "/Users/bharani/Documents/task-challenge-backend/project-banyan-compiler/src/test/resources/sample_challenge_source_zip/challenge_source.zip";
+        //String zipFilePath = "/Users/bharani/Documents/task-challenge-backend/project-banyan-compiler/src/test/resources/sample_challenge_source_zip/challenge_source.zip";
+        String zipFilePath = "/Users/bharani/Documents/task-challenge-backend/project-banyan-compiler/src/test/resources/banyan-sources.zip";
         String outputDir = "/Users/bharani/Documents/task-challenge-backend/project-banyan-compiler/src/test/resources/sample_challenge_source_zip/output";
         ArtifactType rootType = ArtifactType.Challenge;
         String rootId = "unique_task_challenge";

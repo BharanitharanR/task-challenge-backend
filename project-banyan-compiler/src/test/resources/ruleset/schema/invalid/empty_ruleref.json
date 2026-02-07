@@ -4,7 +4,8 @@
   "version": 1,
   "spec": {
     "expression": {
-      "ruleRef": ""
+      "ruleRef": "",
+      "version": 1
     }
   }
 }

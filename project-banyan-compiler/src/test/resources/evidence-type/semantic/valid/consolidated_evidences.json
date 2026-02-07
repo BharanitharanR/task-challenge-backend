@@ -17,7 +17,7 @@
       },
       {
         "name": "country",
-        "type": "BOOLEAN",
+        "type": "STRING",
         "required": true
       },
       {
@@ -27,7 +27,7 @@
       },
       {
         "name": "userType",
-        "type": "INTEGER",
+        "type": "STRING",
         "required": true
       }
     ]

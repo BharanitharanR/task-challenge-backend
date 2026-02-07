@@ -3,6 +3,10 @@
   "id": "max_failed_attempts",
   "version": 1,
   "spec": {
+    "evidenceTypeRef": {
+      "id": "CONSOLIDATED_EVIDENCES",
+      "version": 1
+    },
     "type": "THRESHOLD",
     "input": "failedAttempts",
     "operator": "<=",

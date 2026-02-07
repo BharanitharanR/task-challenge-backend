@@ -3,7 +3,10 @@
   "id": "task_with_actions",
   "version": 1,
   "spec": {
-    "rulesetRef": "login_ruleset",
+    "rulesetRef": {
+      "id": "login_ruleset",
+      "version": 1
+    },
     "resultType": "BOOLEAN",
     "actions": [
       { "on": "FAILURE", "emit": "LOCK_ACCOUNT" },

@@ -6,11 +6,11 @@
     "expression": {
       "operator": "AND",
       "operands": [
-        { "ruleRef": "valid_rule" },
+        { "ruleRef": "valid_rule", "version": 1 },
         {
           "operator": "OR",
           "operands": [
-            { "ruleRef": "" },
+            { "ruleRef": "", "version": 1 },
             { "foo": "bar" }
           ]
         }

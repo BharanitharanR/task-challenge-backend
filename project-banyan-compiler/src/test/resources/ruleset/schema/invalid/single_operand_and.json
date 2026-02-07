@@ -6,7 +6,7 @@
     "expression": {
       "operator": "AND",
       "operands": [
-        { "ruleRef": "only_rule" }
+        { "ruleRef": "only_rule", "version": 1 }
       ]
     }
   }

@@ -1,11 +1,12 @@
 package com.banyan.compiler.schema;
 
-import com.banyan.compiler.core.BanyanCompiler;
-import com.banyan.compiler.core.CompilationResult;
 import com.banyan.compiler.pipeline.EvidenceTypeCompilationPipeline;
 import com.banyan.compiler.pipeline.RuleCompilationPipeline;
 import com.banyan.compiler.pipeline.RuleSetCompilationPipeline;
 import com.banyan.compiler.registry.CompilationPipelineRegistry;
+import com.banyan.compiler.core.BanyanCompiler;
+import com.banyan.compiler.core.CompilationResult;
+import org.junit.jupiter.api.BeforeEach;
 import com.banyan.compiler.testutil.TestResourceLoader;
 import org.junit.jupiter.api.Test;
 
@@ -24,10 +25,12 @@ public class RulesetSchemaValidatorTest {
     public CompilationPipelineRegistry registry = new CompilationPipelineRegistry();
     public BanyanCompiler compiler;
 
-    public RulesetSchemaValidatorTest(){
-        this.registry.register("Rule",new RuleCompilationPipeline());
-        this.registry.register("Ruleset",new RuleSetCompilationPipeline());
-        this.registry.register("EvidenceType",new EvidenceTypeCompilationPipeline());
+    @BeforeEach
+    void setupCompiler() {
+        this.registry = new CompilationPipelineRegistry();
+        this.registry.register("Rule", new RuleCompilationPipeline());
+        this.registry.register("Ruleset", new RuleSetCompilationPipeline());
+        this.registry.register("EvidenceType", new EvidenceTypeCompilationPipeline());
         this.compiler = new BanyanCompiler(this.registry);
     }
 
@@ -61,10 +64,7 @@ public class RulesetSchemaValidatorTest {
                 TestResourceLoader.loadJsonFiles(VALID_RESOURCE);
 
         for (String json : jsons) {
-
-            CompilationResult result = this.compiler.compile(json);
-            result.getErrors().forEach(System.out::println);
-            assertTrue(result.isSuccess());
+            compileWithDependencies(json);
         }
     }
 
@@ -77,5 +77,23 @@ public class RulesetSchemaValidatorTest {
             result.getErrors().forEach(System.out::println);
             assertTrue(!result.isSuccess());
         }
+    }
+
+    private void compileWithDependencies(String rulesetJson) {
+        List<String> evidenceJsons = TestResourceLoader.loadJsonFiles("evidence-type/schema/valid");
+        for (String json : evidenceJsons) {
+            CompilationResult result = this.compiler.compile(json);
+            assertTrue(result.isSuccess(), "Expected evidence compile to succeed: " + result.getErrors());
+        }
+
+        List<String> ruleJsons = TestResourceLoader.loadJsonFiles("rule/schema/valid");
+        for (String json : ruleJsons) {
+            CompilationResult result = this.compiler.compile(json);
+            assertTrue(result.isSuccess(), "Expected rule compile to succeed: " + result.getErrors());
+        }
+
+        CompilationResult rulesetResult = this.compiler.compile(rulesetJson);
+        rulesetResult.getErrors().forEach(System.out::println);
+        assertTrue(rulesetResult.isSuccess(), "Expected ruleset compile to succeed");
     }
 }

@@ -3,6 +3,10 @@
   "id": "country_check",
   "version": 1,
   "spec": {
+    "evidenceTypeRef": {
+      "id": "CONSOLIDATED_EVIDENCES",
+      "version": 1
+    },
     "type": "EQUALITY",
     "input": "country",
     "operator": "==",

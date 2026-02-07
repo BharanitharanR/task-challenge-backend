@@ -3,6 +3,7 @@ package com.banyan.compiler.core;
 import com.banyan.compiler.pipeline.*;
 import com.banyan.compiler.registry.CompilationPipelineRegistry;
 import com.banyan.compiler.testutil.TestResourceLoader;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 
@@ -12,12 +13,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class BanyanCompilerTest {
     public CompilationPipelineRegistry registry = new CompilationPipelineRegistry();
     public BanyanCompiler compiler;
-    public BanyanCompilerTest(){
-        this.registry.register("Rule",new RuleCompilationPipeline());
-        this.registry.register("Ruleset",new RuleSetCompilationPipeline());
-        this.registry.register("EvidenceType",new EvidenceTypeCompilationPipeline());
-        this.registry.register("Task",new TaskCompilationPipeline());
-        this.registry.register("Challenge",new ChallengeCompilationPipeline());
+
+    @BeforeEach
+    void setupCompiler() {
+        this.registry = new CompilationPipelineRegistry();
+        this.registry.register("Rule", new RuleCompilationPipeline());
+        this.registry.register("Ruleset", new RuleSetCompilationPipeline());
+        this.registry.register("EvidenceType", new EvidenceTypeCompilationPipeline());
+        this.registry.register("Task", new TaskCompilationPipeline());
+        this.registry.register("Challenge", new ChallengeCompilationPipeline());
         this.compiler = new BanyanCompiler(this.registry);
     }
 
@@ -39,10 +43,7 @@ public class BanyanCompilerTest {
                 TestResourceLoader.loadJsonFiles(RULESET_VALID_RESOURCE);
 
         for (String json : jsons) {
-            CompilationResult result = this.compiler.compile(json);
-            System.out.println(json);
-            result.getErrors().forEach(System.out::println);
-           // assertTrue(result.isSuccess());
+            compileWithDependencies(json);
         }
     }
 
@@ -52,9 +53,8 @@ public class BanyanCompilerTest {
                 TestResourceLoader.loadJsonFiles(RULESET_INVALID_RESOURCE);
 
         for (String json : jsons) {
-
             CompilationResult result = this.compiler.compile(json);
-           // assertTrue(!result.isSuccess());
+            assertTrue(!result.isSuccess());
         }
     }
 
@@ -64,10 +64,7 @@ public class BanyanCompilerTest {
                 TestResourceLoader.loadJsonFiles(CHALLENGE_VALID_RESOURCE);
 
         for (String json : jsons) {
-            CompilationResult result = this.compiler.compile(json);
-            System.out.println(json);
-            result.getErrors().forEach(System.out::println);
-           // assertTrue(result.isSuccess());
+            compileWithDependencies(json);
         }
     }
 
@@ -90,10 +87,7 @@ public class BanyanCompilerTest {
                 TestResourceLoader.loadJsonFiles(TASK_VALID_RESOURCE);
 
         for (String json : jsons) {
-            CompilationResult result = this.compiler.compile(json);
-            System.out.println(json);
-            result.getErrors().forEach(System.out::println);
-            assertTrue(result.isSuccess());
+            compileWithDependencies(json);
         }
     }
 
@@ -114,10 +108,7 @@ public class BanyanCompilerTest {
         List<String> jsons =
                 TestResourceLoader.loadJsonFiles(RULE_VALID_RESOURCE);
         for (String json : jsons) {
-            CompilationResult result = this.compiler.compile(json);
-            System.out.println(json);
-            result.getErrors().forEach(System.out::println);
-            assertTrue(result.isSuccess());
+            compileWithDependencies(json);
         }
     }
 
@@ -139,7 +130,6 @@ public class BanyanCompilerTest {
                 TestResourceLoader.loadJsonFiles(EVIDENCE_VALID_RESOURCE);
 
         for (String json : jsons) {
-
             CompilationResult result = this.compiler.compile(json);
             assertTrue(result.isSuccess());
         }
@@ -155,6 +145,25 @@ public class BanyanCompilerTest {
             CompilationResult result = this.compiler.compile(json);
             assertTrue(!result.isSuccess());
         }
+
+    }
+
+    private void compileWithDependencies(String json) {
+        List<String> evidenceJsons = TestResourceLoader.loadJsonFiles(EVIDENCE_VALID_RESOURCE);
+        for (String evidence : evidenceJsons) {
+            CompilationResult result = this.compiler.compile(evidence);
+            assertTrue(result.isSuccess(), "Evidence compile failed: " + result.getErrors());
+        }
+
+        List<String> ruleJsons = TestResourceLoader.loadJsonFiles(RULE_VALID_RESOURCE);
+        for (String rule : ruleJsons) {
+            CompilationResult result = this.compiler.compile(rule);
+            assertTrue(result.isSuccess(), "Rule compile failed: " + result.getErrors());
+        }
+
+        CompilationResult result = this.compiler.compile(json);
+        result.getErrors().forEach(System.out::println);
+        assertTrue(result.isSuccess(), "Expected compilation to succeed");
     }
 
 

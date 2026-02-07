@@ -4,7 +4,8 @@
   "version": 1,
   "spec": {
     "expression": {
-      "ruleRef": "max_failed_attempts"
+      "ruleRef": "max_failed_attempts",
+      "version": 1
     }
   }
 }

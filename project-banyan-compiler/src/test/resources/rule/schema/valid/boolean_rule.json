@@ -3,6 +3,10 @@
   "id": "business_hours_only",
   "version": 2,
   "spec": {
+    "evidenceTypeRef": {
+      "id": "CONSOLIDATED_EVIDENCES",
+      "version": 1
+    },
     "type": "RANGE",
     "input": "businessHours",
     "operator": "==",

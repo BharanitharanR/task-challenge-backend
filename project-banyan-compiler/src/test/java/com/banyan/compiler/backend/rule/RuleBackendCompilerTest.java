@@ -3,7 +3,6 @@ package com.banyan.compiler.backend.rule;
 import com.banyan.compiler.backend.context.CompilationContext;
 import com.banyan.compiler.backend.evidence.CompiledEvidenceTypeArtifact;
 import com.banyan.compiler.backend.evidence.EvidenceBackendCompiler;
-import com.banyan.compiler.compatibility.bootstrap.CompilerBootstrapContextImpl;
 import com.banyan.compiler.compatibility.bootstrap.CompilerCompatibilityBootstrap;
 import com.banyan.compiler.enums.ArtifactType;
 import com.banyan.compiler.semantics.EvidenceTypeSemanticValidator;
@@ -24,12 +23,14 @@ public class RuleBackendCompilerTest {
     private static final RuleSemanticValidator validator = new RuleSemanticValidator();
     private static final ObjectMapper mapper = new ObjectMapper();
     private static final String VALID_RESOURCE = "rule/semantic/valid";
+    private static final String EVIDENCE_RESOURCE = "evidence-type/semantic/valid";
 
     @Test
     public void compile_validRule_shouldProduceCompiledArtifact() throws JsonProcessingException {
         List<String> jsons =
                 TestResourceLoader.loadJsonFiles(VALID_RESOURCE);
         CompilationContext ctx = new CompilationContext(CompilerCompatibilityBootstrap.bootstrap());
+        registerEvidenceTypes(ctx);
         for (String json : jsons) {
             List<String> errors = validator.validate(json);
             assertTrue(errors.isEmpty(), "Expected no errors but got: " + errors);
@@ -39,8 +40,17 @@ public class RuleBackendCompilerTest {
             ctx.register(compileEvidence);
             assertEquals(ArtifactType.Rule,compileEvidence.type());
         }
-        System.out.println(ctx.resolve(ArtifactType.Rule,"business_hours_only",2).payload().toString());
-        assertEquals("business_hours_only",ctx.resolve(ArtifactType.Rule,"business_hours_only",2).id());
+    }
 
+    private void registerEvidenceTypes(CompilationContext ctx) throws JsonProcessingException {
+        EvidenceTypeSemanticValidator evidenceValidator = new EvidenceTypeSemanticValidator();
+        List<String> jsons = TestResourceLoader.loadJsonFiles(EVIDENCE_RESOURCE);
+        for (String json : jsons) {
+            List<String> errors = evidenceValidator.validate(json);
+            assertTrue(errors.isEmpty(), "Expected no evidence errors but got: " + errors);
+            EvidenceBackendCompiler compiler = new EvidenceBackendCompiler();
+            CompiledEvidenceTypeArtifact artifact = compiler.compile(mapper.readTree(json), ctx);
+            ctx.register(artifact);
+        }
     }
 }

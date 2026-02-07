@@ -3,6 +3,10 @@
   "id": "min_score_required",
   "version": 3,
   "spec": {
+    "evidenceTypeRef": {
+      "id": "CONSOLIDATED_EVIDENCES",
+      "version": 1
+    },
     "type": "THRESHOLD",
     "input": "score",
     "operator": ">",

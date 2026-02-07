@@ -6,8 +6,8 @@
     "expression": {
       "operator": "NOT",
       "operands": [
-        { "ruleRef": "rule1" },
-        { "ruleRef": "rule2" }
+        { "ruleRef": "rule1", "version": 1 },
+        { "ruleRef": "rule2", "version": 1 }
       ]
     }
   }

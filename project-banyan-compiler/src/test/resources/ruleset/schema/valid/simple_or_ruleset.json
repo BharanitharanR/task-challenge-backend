@@ -6,8 +6,8 @@
     "expression": {
       "operator": "OR",
       "operands": [
-        { "ruleRef": "geo_allowed" },
-        { "ruleRef": "ip_whitelisted" }
+        { "ruleRef": "geo_allowed", "version": 1 },
+        { "ruleRef": "ip_whitelisted", "version": 2 }
       ]
     }
   }
