@@ -21,11 +21,15 @@ import com.banyan.compiler.backend.task.CompiledTask;
 import com.banyan.compiler.backend.task.CompiledTaskArtifact;
 import com.banyan.platform.deserializer.*;
 
+import com.banyan.platform.runtime.context.DarId;
 import com.banyan.platform.runtime.context.DarRuntimeContext;
+import com.banyan.platform.runtime.context.DarRuntimeStore;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.time.Duration;
 
 public final class ZipDarLoader {
 
@@ -33,24 +37,24 @@ public final class ZipDarLoader {
             LoggerFactory.getLogger(ZipDarLoader.class);
     private static  final ObjectMapper mapper = new ObjectMapper();
 
-    private static  final Map<DarRuntimeContext.ChallengeKey, CompiledChallenge> challenges = new HashMap<>();
-    private static  final Map<DarRuntimeContext.TaskKey, CompiledTask> tasks = new HashMap<>();
-    private static  final Map<DarRuntimeContext.RulesetKey, CompiledRuleset> rulesets = new HashMap<>();
-    private static  final Map<DarRuntimeContext.RuleKey, CompiledRule> rules = new HashMap<>();
-    private static  final Map<DarRuntimeContext.EvidenceTypeKey, CompiledEvidenceType> evidenceTypes = new HashMap<>();
-
-    private static  final CompiledChallengeArtifactDeserializer CHALLENGE =
-            new CompiledChallengeArtifactDeserializer(mapper);
-    private static  final CompiledTaskArtifactDeserializer TASK =
-            new CompiledTaskArtifactDeserializer(mapper);
-    private static  final CompiledRulesetArtifactDeserializer RULESET =
-            new CompiledRulesetArtifactDeserializer(mapper);
-    private static  final CompiledRuleArtifactDeserializer RULE =
-            new CompiledRuleArtifactDeserializer(mapper);
-    private static  final CompiledEvidenceTypeArtifactDeserializer EVIDENCETYPE =
-            new CompiledEvidenceTypeArtifactDeserializer(mapper);
 
     public static DarRuntimeContext load(String darPath) throws Exception {
+        Map<DarRuntimeContext.ChallengeKey, CompiledChallenge> challenges = new HashMap<>();
+        Map<DarRuntimeContext.TaskKey, CompiledTask> tasks = new HashMap<>();
+        Map<DarRuntimeContext.RulesetKey, CompiledRuleset> rulesets = new HashMap<>();
+        Map<DarRuntimeContext.RuleKey, CompiledRule> rules = new HashMap<>();
+        Map<DarRuntimeContext.EvidenceTypeKey, CompiledEvidenceType> evidenceTypes = new HashMap<>();
+
+        CompiledChallengeArtifactDeserializer CHALLENGE =
+                new CompiledChallengeArtifactDeserializer(mapper);
+        CompiledTaskArtifactDeserializer TASK =
+                new CompiledTaskArtifactDeserializer(mapper);
+        CompiledRulesetArtifactDeserializer RULESET =
+                new CompiledRulesetArtifactDeserializer(mapper);
+        CompiledRuleArtifactDeserializer RULE =
+                new CompiledRuleArtifactDeserializer(mapper);
+        CompiledEvidenceTypeArtifactDeserializer EVIDENCETYPE =
+                new CompiledEvidenceTypeArtifactDeserializer(mapper);
 
         try (ZipFile zip = new ZipFile(darPath)) {
             Enumeration<? extends ZipEntry> entries = zip.entries();
@@ -93,10 +97,13 @@ public final class ZipDarLoader {
     }
 
     public static void main(String args[]) throws Exception {
+        DarRuntimeStore store = new DarRuntimeStore(10000L, Duration.ofMinutes(30));
         DarRuntimeContext runtimeContext = ZipDarLoader.load("/Users/bharani/Documents/task-challenge-backend/project-banyan-runtime/src/main/resources/compilation_package.dar");
-        for (var entry : runtimeContext.rulesets()) {
-            DarRuntimeContext.RulesetKey key = entry.getKey();
-            CompiledRuleset ruleset = entry.getValue();
+        DarRuntimeContext.ChallengeKey key = null;
+        for (var entry : runtimeContext.challenges()) {
+            key = entry.getKey();
         }
+        DarId id = store.register(new DarId(key.version(),key.name()),runtimeContext);
+        LOGGER.info("id {} : name {} ",id.darName(),id.uniqueId());
     }
 }
