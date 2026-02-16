@@ -18,8 +18,8 @@ public final class RuntimeEvaluator {
             boolean businessHours
     )
     {
-        EvidenceContext ctx = new EvidenceContext(failedAttempts,businessHours);
+        //EvidenceContext ctx = new EvidenceContext(failedAttempts,businessHours);
         CompiledChallenge challenge = this.challengeAstRegistry.get(challengeId,version);
-        return challenge.evaluate(ctx);
+        return null;//challenge.evaluate(ctx);
     }
 }

@@ -1,3 +1,4 @@
+/*
 package com.banyan.platform.ast.node;
 
 import com.banyan.platform.runtime.EvidenceContext;
@@ -11,3 +12,4 @@ public  class FailedAttemptsRuleNode implements RuleNode{
         return context.getFailedAttempts() <= THRESHOLD;
     }
 }
+*/

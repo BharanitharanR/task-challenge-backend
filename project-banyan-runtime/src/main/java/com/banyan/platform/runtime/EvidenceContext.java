@@ -3,35 +3,19 @@ package com.banyan.platform.runtime;
 // import lombok.Getter;
 // import lombok.Setter;
 
+import java.util.Map;
 
-import com.banyan.platform.ast.node.AndRuleNode;
-import com.banyan.platform.ast.node.BusinessHoursRuleNode;
-import com.banyan.platform.ast.node.FailedAttemptsRuleNode;
+public final class EvidenceContext {
 
-public class EvidenceContext {
-    private final int failedAttempts;
-    private final boolean businessHours;
+    private final Map<String, Object> values;
 
-    public EvidenceContext(int failedAttempts,boolean businessHours) {
-        this.businessHours = businessHours;
-        this.failedAttempts = failedAttempts;
+    public EvidenceContext(Map<String, Object> values) {
+        this.values = Map.copyOf(values);
     }
 
-    public int getFailedAttempts() {
-        return failedAttempts;
-    }
-
-    public boolean isBusinessHours() {
-        return businessHours;
-    }
-
-    public static void main(String args[])
-    {
-        EvidenceContext ctx = new EvidenceContext(4,true);
-        BusinessHoursRuleNode br = new BusinessHoursRuleNode();
-        FailedAttemptsRuleNode failed = new FailedAttemptsRuleNode();
-        AndRuleNode and = new AndRuleNode(br,failed);
-        System.out.println(and.evaluate(ctx)+":"+br.evaluate(ctx));
+    public Object get(String key) {
+        return values.get(key);
     }
 }
+
 

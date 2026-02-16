@@ -1,3 +1,4 @@
+/*
 package com.banyan.platform.ast.node;
 
 import com.banyan.platform.runtime.EvidenceContext;
@@ -8,3 +9,4 @@ public class BusinessHoursRuleNode implements RuleNode {
         return context.isBusinessHours();
     }
 }
+*/

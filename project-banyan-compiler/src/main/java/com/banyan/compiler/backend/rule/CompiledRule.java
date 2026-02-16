@@ -1,6 +1,5 @@
 package com.banyan.compiler.backend.rule;
 
-import com.banyan.compiler.enums.RuleType;
 
 public record CompiledRule(
         String input,      // e.g. "failedAttempts"

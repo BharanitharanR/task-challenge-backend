@@ -16,6 +16,7 @@ import com.banyan.compiler.backend.rule.CompiledRule;
 import com.banyan.compiler.backend.rule.CompiledRuleArtifact;
 import com.banyan.compiler.backend.ruleset.CompiledRuleset;
 import com.banyan.compiler.backend.ruleset.CompiledRulesetArtifact;
+import com.banyan.compiler.backend.ruleset.RulesetExpression;
 import com.banyan.compiler.backend.task.CompiledTask;
 
 import com.banyan.compiler.backend.task.CompiledTaskArtifact;
@@ -99,11 +100,17 @@ public final class ZipDarLoader {
     public static void main(String args[]) throws Exception {
         DarRuntimeStore store = new DarRuntimeStore(10000L, Duration.ofMinutes(30));
         DarRuntimeContext runtimeContext = ZipDarLoader.load("/Users/bharani/Documents/task-challenge-backend/project-banyan-runtime/src/main/resources/compilation_package.dar");
-        DarRuntimeContext.ChallengeKey key = null;
-        for (var entry : runtimeContext.challenges()) {
+        DarRuntimeContext.RulesetKey key = null;
+        DarRuntimeContext.RuleKey ruleKey = null;
+        for (var entry : runtimeContext.rulesets()) {
             key = entry.getKey();
         }
+        for (var entry : runtimeContext.rules()) {
+            ruleKey = entry.getKey();
+        }
         DarId id = store.register(new DarId(key.version(),key.name()),runtimeContext);
-        LOGGER.info("id {} : name {} ",id.darName(),id.uniqueId());
+        RulesetExpression exp = runtimeContext.ruleset(key).root();
+        CompiledRule rule = runtimeContext.rule(ruleKey);
+        LOGGER.info("id {} : name {} expression {} compiledRule {}",id.darName(),id.uniqueId(),exp.toString(),rule.toString());
     }
 }
