@@ -4,9 +4,7 @@ import com.banyan.compiler.backend.rule.CompiledRule;
 import com.banyan.compiler.backend.ruleset.LogicalNode;
 import com.banyan.compiler.backend.ruleset.RuleRefNode;
 import com.banyan.compiler.backend.ruleset.RulesetExpression;
-import com.banyan.platform.ast.node.ExecutableNode;
-import com.banyan.platform.ast.node.LogicalExecutableNode;
-import com.banyan.platform.ast.node.RuleExecutableNode;
+import com.banyan.platform.ast.node.*;
 import com.banyan.platform.runtime.context.DarRuntimeContext;
 import java.util.List;
 public final class AstBuilder {
@@ -41,10 +39,18 @@ public final class AstBuilder {
                             .map(this::buildNode)
                             .toList();
 
-            return new LogicalExecutableNode(
-                    logical.operator(),
-                    children
-            );
+            switch (logical.operator()) {
+
+                case AND:
+                    return new AndLogicalNode(children);
+
+                case OR:
+                    return new OrLogicalNode(children);
+
+                default:
+                    throw new IllegalStateException("Unsupported operator");
+            }
+
         }
 
         if (expr instanceof RuleRefNode ref) {
