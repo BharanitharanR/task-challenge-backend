@@ -1,0 +1,16 @@
+{
+  "kind": "Task",
+  "id": "driving_india_task",
+  "version": 1,
+  "spec": {
+    "rulesetRef": {
+      "id" : "driving_india_ruleset",
+      "version" : 1
+    },
+    "resultType": "BOOLEAN",
+    "actions": [
+      { "on": "FAILURE", "emit": "LOCK_ACCOUNT" },
+      { "on": "ALWAYS", "emit": "AUDIT_EVENT" }
+    ]
+  }
+}

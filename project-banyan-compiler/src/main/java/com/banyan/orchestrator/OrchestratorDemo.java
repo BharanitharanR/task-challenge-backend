@@ -15,11 +15,12 @@ public class OrchestratorDemo {
         Orchestrator orchestrator = new Orchestrator();
         
         // Example usage - compile a challenge from a ZIP file
-        String zipFilePath = "/Users/bharani/Documents/task-challenge-backend/project-banyan-compiler/src/test/resources/sample_challenge_source_zip/challenge_source.zip";
+        String zipFilePath = "/Users/bharani/Documents/task-challenge-backend/project-banyan-compiler/src/test/resources/driving_lesson/driving_lessons.zip";
+        //String zipFilePath = "/Users/bharani/Documents/task-challenge-backend/project-banyan-compiler/src/test/resources/sample_challenge_source_zip/challenge_source.zip";
         //String zipFilePath = "/Users/bharani/Documents/task-challenge-backend/project-banyan-compiler/src/test/resources/banyan-sources.zip";
         String outputDir = "/Users/bharani/Documents/task-challenge-backend/project-banyan-compiler/src/test/resources/sample_challenge_source_zip/output";
         ArtifactType rootType = ArtifactType.Challenge;
-        String rootId = "unique_task_challenge";
+        String rootId = "driving_india_challenge";
         int rootVersion = 1;
         
         try {
@@ -31,7 +32,7 @@ public class OrchestratorDemo {
                 rootId, 
                 rootVersion
             );
-            
+            result.getErrors().stream().forEach(System.out::println);
             if (result.isSuccess()) {
                 System.out.println("Compilation successful!");
                 

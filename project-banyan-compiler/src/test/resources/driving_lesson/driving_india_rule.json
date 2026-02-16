@@ -1,0 +1,15 @@
+{
+  "kind": "Rule",
+  "id": "driving_india_rule",
+  "version": 1,
+  "spec": {
+    "evidenceTypeRef": {
+      "id": "DRIVING_METRIC",
+      "version": 1
+    },
+    "type": "EQUALITY",
+    "input": "country",
+    "operator": "==",
+    "value": "IN"
+  }
+}

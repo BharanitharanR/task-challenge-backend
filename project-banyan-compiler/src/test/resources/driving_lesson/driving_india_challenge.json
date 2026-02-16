@@ -1,0 +1,10 @@
+{
+  "kind": "Challenge",
+  "id": "driving_india_challenge",
+  "version": 1,
+  "spec": {
+    "tasks": [
+      {"id": "driving_india_task","version": 1}
+    ]
+  }
+}

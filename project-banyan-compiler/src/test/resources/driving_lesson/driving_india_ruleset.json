@@ -1,0 +1,28 @@
+{
+  "kind": "Ruleset",
+  "id": "driving_india_ruleset",
+  "version": 1,
+  "spec": {
+    "expression": {
+      "operator": "AND",
+      "operands": [
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "ruleRef": "driving_lane_departure_count_rule",
+              "version": 1
+            },
+            {
+              "ruleRef": "driving_over_speed_limit_rule",
+              "version": 1
+            }
+          ]
+        },
+        {
+          "ruleRef": "driving_india_rule", "version": 1
+        }
+      ]
+    }
+  }
+}

@@ -2,6 +2,7 @@ package com.banyan.platform.ast.node;
 
 import com.banyan.compiler.backend.rule.CompiledRule;
 import com.banyan.platform.runtime.EvidenceContext;
+import com.banyan.platform.runtime.exception.MissingEvidenceException;
 
 public final class RuleExecutableNode implements ExecutableNode {
 
@@ -17,7 +18,7 @@ public final class RuleExecutableNode implements ExecutableNode {
         Object actual = context.get(rule.input());
 
         if (actual == null) {
-            throw new IllegalArgumentException(
+            throw new MissingEvidenceException(
                     "Missing evidence: " + rule.input()
             );
         }

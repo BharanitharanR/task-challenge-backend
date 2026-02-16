@@ -1,0 +1,25 @@
+{
+  "kind": "EvidenceType",
+  "id": "DRIVING_METRIC",
+  "version": 1,
+  "status": "ACTIVE",
+  "spec": {
+    "fields": [
+      {
+        "name": "speedOverLimitSeconds",
+        "type": "INTEGER",
+        "required": false
+      },
+      {
+        "name": "laneDepartureCount",
+        "type": "INTEGER",
+        "required": false
+      },
+      {
+        "name": "country",
+        "type": "STRING",
+        "required": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "kind": "Rule",
+  "id": "driving_over_speed_limit_rule",
+  "version": 1,
+  "spec": {
+    "evidenceTypeRef": {
+      "id": "DRIVING_METRIC",
+      "version": 1
+    },
+    "type": "EQUALITY",
+    "input": "speedOverLimitSeconds",
+    "operator": "<=",
+    "value": 50000
+  }
+}
