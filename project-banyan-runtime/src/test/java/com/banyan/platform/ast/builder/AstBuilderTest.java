@@ -13,7 +13,8 @@ public class AstBuilderTest {
 
 
     @Test
-    public  void endToendTest() {
+    public  void endToendTest()
+    {
 
         try {
             // 1. Load DAR

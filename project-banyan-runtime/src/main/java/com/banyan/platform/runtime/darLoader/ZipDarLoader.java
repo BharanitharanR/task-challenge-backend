@@ -96,7 +96,7 @@ public final class ZipDarLoader {
             return new DarRuntimeContext(challenges,tasks,rulesets,rules,evidenceTypes);
         }
     }
-
+/*
     public static void main(String args[]) throws Exception {
         DarRuntimeStore store = new DarRuntimeStore(10000L, Duration.ofMinutes(30));
         DarRuntimeContext runtimeContext = ZipDarLoader.load("/Users/bharani/Documents/task-challenge-backend/project-banyan-runtime/src/main/resources/compilation_package.dar");
@@ -112,5 +112,5 @@ public final class ZipDarLoader {
         RulesetExpression exp = runtimeContext.ruleset(key).root();
         CompiledRule rule = runtimeContext.rule(ruleKey);
         LOGGER.info("id {} : name {} expression {} compiledRule {}",id.darName(),id.uniqueId(),exp.toString(),rule.toString());
-    }
+    }*/
 }
