@@ -58,21 +58,39 @@ void goodDriver() throws Exception {
 
     DarRuntimeContext context =
             ZipDarLoader.load("./src/main/resources/compilation_driving_package.dar");
+    context =
+            ZipDarLoader.load("./src/main/resources/compilation_package.dar");
 
     var key = context.rulesets().iterator().next().getKey();
+
 
     ExecutableNode root =
             new AstBuilder(context).build(key);
 
-    EvidenceContext evidence = new EvidenceContext(Map.of(
+
+    EvidenceContext evidencetwo = new EvidenceContext(Map.of(
             "speedOverLimitSeconds",  500000,
             "laneDepartureCount", 9,// triggers first OR branch true
             "country","IN"
             // intentionally omit some fields from second branch
     ));
 
-    boolean result = root.evaluate(evidence);
+    // 4. Create evidence
+    EvidenceContext evidence = new EvidenceContext(Map.of(
+            "faileAttempts", 4,
+            "score", 75,
+            "userType", 2,
+            "country", "IN",
+            "businessHours", true
+            // intentionally omit some fields from second branch
+    ));
 
+
+    // 5. Evaluate
+    boolean result = root.evaluate(evidence);
+    assertTrue(result);
+
+    result = root.evaluate(evidencetwo);
     assertTrue(result);
 }
     @Test

@@ -18,6 +18,7 @@
         <module>project-banyan-compiler</module>
         <module>banyan-artifact-contract</module>
         <module>project-banyan-runtime</module>
+        <module>project-banyan-service</module>
     </modules>
 
     <properties>

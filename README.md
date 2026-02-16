@@ -40,4 +40,4 @@ boolean result = root.evaluate(evidence);
 
 - Compiler: [`project-banyan-compiler/README.md`](project-banyan-compiler/README.md)
 - Runtime: [`project-banyan-runtime/README.md`](project-banyan-runtime/README.md)
-- DAR spec: [`docs/DAR_SPEC.md`](docs/DAR_SPEC.md)
+- DAR spec: [`docs/DAR_SPEC.md`]([AstBuilderTest.java](project-banyan-runtime/src/test/java/com/banyan/platform/ast/builder/AstBuilderTest.java)docs/DAR_SPEC.md)
